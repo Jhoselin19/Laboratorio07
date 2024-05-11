@@ -29,5 +29,29 @@ namespace Business
             customersByName = customers.Where(customer => customer.Name.Contains(name)).ToList();
             return customersByName;
         }
+
+        public List<Customer> GetActiveCustomers()
+        {
+            CustomerData data = new CustomerData();
+            List<Customer> customers = data.GetCustomer();
+
+            // Filtrar solo los clientes con Active = true
+            List<Customer> activeCustomers = customers.Where(customer => customer.Active).ToList();
+
+            return activeCustomers;
+        }
+
+
+        public void RegisterCustomer(Customer customer)
+        {
+            CustomerData data = new CustomerData();
+            data.RegisterCustomer(customer);
+        }
+
+        public void DeleteCustomer(Customer customer)
+        {
+            CustomerData data = new CustomerData();
+            data.Drop(customer);
+        }
     }
 }
